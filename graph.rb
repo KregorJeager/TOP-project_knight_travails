@@ -15,7 +15,7 @@ class Graph
       next_moves(que[0]).each do |move|
         # find(move) will return the node given a postion(x,y)
         connect(que[0], find(move)) if already_exsit?(move)
-        # Create the node give postion(move) then connect it with que[0]
+        # Create node given postion(x,y) then connect it with que[0]
         # returns the created node
         que << create_node(que[0], move) unless already_exsit(move)
       end
@@ -27,5 +27,11 @@ class Graph
   def connect(node0, node1)
     node0.adj << node1 unless node0.adj.inlude?(node1)
     node1.adj << node0 unless node1.adj.inclue?(node0)
+  end
+
+  def create_node(node, move)
+    new_node = Gnode.new(move)
+    connect(node, new_node)
+    new_node
   end
 end
