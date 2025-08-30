@@ -9,7 +9,6 @@ class Graph
   end
 
   def create_graph(curr_pos)
-    # return arr of all valid (x,y) postion
     que = [Gnode.new(curr_pos)]
     until que.nil?
       # next_move will get arr of all valid (x,y) postion of que
@@ -22,5 +21,11 @@ class Graph
       end
       que.delete_at(0)
     end
+  end
+
+  # Connect two nodes unless there is already a connection
+  def connect(node0, node1)
+    node0.adj << node1 unless node0.adj.inlude?(node1)
+    node1.adj << node0 unless node1.adj.inclue?(node0)
   end
 end
