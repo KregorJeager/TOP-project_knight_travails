@@ -1,5 +1,7 @@
 # frozen_string_literal: false
 
+require relative 'graph_node'
+
 # Graph
 class Graph
   def initialize(curr_pos)
