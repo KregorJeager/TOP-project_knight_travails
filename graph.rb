@@ -6,6 +6,7 @@ require relative 'graph_node'
 class Graph
   def initialize(curr_pos)
     create_graph(curr_pos)
+    @all_nodes = []
   end
 
   def create_graph(curr_pos)
@@ -19,7 +20,7 @@ class Graph
         # returns the created node
         que << create_node(que[0], move) unless already_exsit(move)
       end
-      que.delete_at(0)
+      @all_nodes << que.delete_at(0)
     end
   end
 
