@@ -42,4 +42,28 @@ class Graph
     end
     false
   end
+
+  # Will calculate all 8 possible move from a pos even outside of 8x8 grid then filter
+  # the valid moves
+  def next_moves(node)
+    pos = node.pos
+    valid_moves = get_8knight_move(pos).filter(&:valid_move?)
+  end
+
+  def get_8knight_move(pos)
+    [[pos[0] - 1, pos[1] + 2],
+     [pos[0] - 1, pos[1] - 2],
+     [pos[0] - 2, pos[1] + 1],
+     [pos[0] - 2, pos[1] - 1],
+     [pos[0] + 1, pos[1] + 2],
+     [pos[0] + 1, pos[1] - 2],
+     [pos[0] + 2, pos[1] + 1],
+     [pos[0] + 2, pos[1] - 1]]
+  end
+
+  def valid_move?(pos)
+    return true if pos[0] >= 1 || pos[0] <= 8 && pos[1] >= 1 || pos[1] <= 8
+
+    false
+  end
 end
