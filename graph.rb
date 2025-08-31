@@ -1,6 +1,6 @@
 # frozen_string_literal: false
 
-require relative 'graph_node'
+require_relative 'graph_node'
 
 # Graph
 class Graph
@@ -46,7 +46,7 @@ class Graph
   # Will calculate all 8 possible move from a pos even outside of 8x8 grid then filter
   # the valid moves
   def next_moves(node)
-    get_8knight_move(node.pos).filter(&:valid_move?)
+    get_8knight_move(node.pos).filter { |pos| valid_move?(pos) }
   end
 
   def get_8knight_move(pos)
@@ -66,3 +66,6 @@ class Graph
     false
   end
 end
+
+grp = Graph.new([0, 0])
+p grp
