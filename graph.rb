@@ -35,4 +35,11 @@ class Graph
     connect(node, new_node)
     new_node
   end
+
+  def already_exsit?(move)
+    @all_nodes.each do |node|
+      return true if node.pos == move
+    end
+    false
+  end
 end
