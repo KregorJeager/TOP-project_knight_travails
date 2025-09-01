@@ -22,7 +22,6 @@ class Graph
         # returns the created node
         que << create_node(que[0], move) unless already_exist?(move)
       end
-      binding.pry
       @all_nodes << que.delete_at(0)
     end
   end
@@ -64,7 +63,7 @@ class Graph
   end
 
   def valid_move?(pos)
-    return true if pos[0] >= 1 && pos[1] <= 8
+    return true if pos[0] >= 1 && pos[0] <= 8 && pos[1] >= 1 && pos[1] <= 8
 
     false
   end
@@ -75,4 +74,4 @@ class Graph
 end
 
 grp = Graph.new([0, 0])
-p grp.valid_move?([1, 1])
+p grp.valid_move?([-1, 1])
