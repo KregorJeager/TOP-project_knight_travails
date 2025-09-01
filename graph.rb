@@ -5,12 +5,13 @@ require_relative 'graph_node'
 # Graph
 class Graph
   def initialize(curr_pos)
-    create_graph(curr_pos)
-    @all_nodes = []
+    node = Gnode.new(curr_pos)
+    @all_nodes = [] << node
+    create_graph(node)
   end
 
-  def create_graph(curr_pos)
-    que = [Gnode.new(curr_pos)]
+  def create_graph(node)
+    que = [] << node
     until que.nil?
       # next_move will get arr of all valid (x,y) postion of que
       next_moves(que[0]).each do |move|
@@ -37,6 +38,7 @@ class Graph
   end
 
   def already_exsit?(move)
+    p @all_nodes
     @all_nodes.each do |node|
       return true if node.pos == move
     end
