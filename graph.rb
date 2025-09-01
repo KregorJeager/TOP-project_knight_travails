@@ -38,7 +38,6 @@ class Graph
   end
 
   def already_exist?(move)
-    p @all_nodes
     @all_nodes.each do |node|
       return true if node.pos == move
     end
@@ -66,6 +65,10 @@ class Graph
     return true if pos[0] >= 1 || pos[0] <= 8 && pos[1] >= 1 || pos[1] <= 8
 
     false
+  end
+
+  def find(move)
+    @all_nodes.filter { |node| node.pos == move }.at(0)
   end
 end
 
