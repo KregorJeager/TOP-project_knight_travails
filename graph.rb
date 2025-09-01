@@ -16,10 +16,10 @@ class Graph
       # next_move will get arr of all valid (x,y) postion of que
       next_moves(que[0]).each do |move|
         # find(move) will return the node given a postion(x,y)
-        connect(que[0], find(move)) if already_exsit?(move)
+        connect(que[0], find(move)) if already_exist?(move)
         # Create node given postion(x,y) then connect it with que[0]
         # returns the created node
-        que << create_node(que[0], move) unless already_exsit(move)
+        que << create_node(que[0], move) unless already_exist?(move)
       end
       @all_nodes << que.delete_at(0)
     end
@@ -37,7 +37,7 @@ class Graph
     new_node
   end
 
-  def already_exsit?(move)
+  def already_exist?(move)
     p @all_nodes
     @all_nodes.each do |node|
       return true if node.pos == move
