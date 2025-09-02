@@ -5,15 +5,18 @@ require 'pry-byebug'
 
 # Graph
 class Graph
+  attr_accessor :node
+
   def initialize(curr_pos)
-    node = Gnode.new(curr_pos)
+    @node = Gnode.new(curr_pos)
     @all_nodes = [] << node
-    create_graph(node)
+    create_graph(@node)
+    p @all_nodes.length
   end
 
   def create_graph(node)
     que = [] << node
-    until que.nil?
+    until que.empty?
       # next_move will get arr of all valid (x,y) postion of que
       next_moves(que[0]).each do |move|
         # find(move) will return the node given a postion(x,y)
@@ -48,6 +51,8 @@ class Graph
   # Will calculate all 8 possible move from a pos even outside of 8x8 grid then filter
   # the valid moves
   def next_moves(node)
+    return [] if node.nil?
+
     get_8knight_move(node.pos).filter { |pos| valid_move?(pos) }
   end
 
@@ -63,7 +68,7 @@ class Graph
   end
 
   def valid_move?(pos)
-    return true if pos[0] >= 1 && pos[0] <= 8 && pos[1] >= 1 && pos[1] <= 8
+    return true if pos[0] >= 0 && pos[0] <= 7 && pos[1] >= 0 && pos[1] <= 7
 
     false
   end
@@ -74,4 +79,3 @@ class Graph
 end
 
 grp = Graph.new([0, 0])
-p grp.valid_move?([-1, 1])
