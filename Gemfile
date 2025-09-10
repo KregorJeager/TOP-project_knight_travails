@@ -3,4 +3,5 @@
 source 'https://rubygems.org'
 
 # gem "rails"
+gem 'pry-byebug'
 gem 'rubocop', require: false

@@ -5,7 +5,7 @@ require 'pry-byebug'
 
 # Graph
 class Graph
-  attr_accessor :node
+  attr_accessor :node, :all_nodes, :adj
 
   def initialize(curr_pos)
     @node = Gnode.new(curr_pos)
@@ -20,10 +20,13 @@ class Graph
       # next_move will get arr of all valid (x,y) postion of que
       next_moves(que[0]).each do |move|
         # find(move) will return the node given a postion(x,y)
-        connect(que[0], find(move)) if already_exist?(move)
-        # Create node given postion(x,y) then connect it with que[0]
-        # returns the created node
-        que << create_node(que[0], move) unless already_exist?(move)
+        if already_exist?(move)
+          connect(que[0], find(move))
+        else
+          # Create node given postion(x,y) then connect it with que[0]
+          # returns the created node
+          que << create_node(que[0], move)
+        end
       end
       @all_nodes << que.delete_at(0)
     end
@@ -51,8 +54,6 @@ class Graph
   # Will calculate all 8 possible move from a pos even outside of 8x8 grid then filter
   # the valid moves
   def next_moves(node)
-    return [] if node.nil?
-
     get_8knight_move(node.pos).filter { |pos| valid_move?(pos) }
   end
 
@@ -74,8 +75,27 @@ class Graph
   end
 
   def find(move)
-    @all_nodes.filter { |node| node.pos == move }.at(0)
+    @all_nodes.each { |node| return node if node.pos == move }
+    p 'find failed'
+  end
+
+  def print
+    board = Array.new(8) { Array.new(8) }
+    @all_nodes.each do |node|
+      nodes = []
+      node.adj.each { |nde| nodes << nde.pos }
+      p "pos: #{node.pos} adj: #{nodes}"
+    end
   end
 end
 
 grp = Graph.new([0, 0])
+node = Gnode.new([3, 3])
+all_node = grp.all_nodes.uniq
+all_node.each { |node| }
+
+all_node.each do |node|
+  nodes = []
+  node.adj.each { |nde| nodes << nde.pos }
+  # p "pos: #{node.pos} adj: #{nodes}"
+end
